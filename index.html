@@ -1,11 +1,109 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Index Page</title>
-  </head>
-  <body>
-    <h1>Hello, world!</h1>
-  </body>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.1/css/all.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Dhasboard</title>
+</head>
+
+<body>
+    <div class="b1-container">
+        <!-- HEADER -->
+        <div class="b1-navbar navbar navbar-expand-md">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Soporte B1</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse bg-white" id="navbarScroll">
+                    <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- END HEADER -->
+
+        <!-- ASIDE -->
+        <div class="b1-aside">
+            <ul class="navbar-nav flex-column">
+                <li class="nav-item px-2 my-1">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item px-2 my-1">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item px-2 my-1">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+            </ul>
+        </div>
+        <!-- END ASIDE -->
+
+        <div class="b1-main">
+
+            <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
+                aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Library</li>
+                </ol>
+            </nav>
+
+
+            <p>Resize the browser window to fire the <code>resize</code> event.</p>
+            <p>Window height: <span id="height"></span></p>
+            <p>Window width: <span id="width"></span></p>
+
+            <div class="card">
+                <!-- Card Header -->
+                <div class="card-header">
+                  <h5>Generate a Password</h5>
+                </div>
+        
+                <!-- Parent Container & Pass Text -->
+                <div class="card-body">
+                  <div class="mb-3"><label for="passwordLength" class="form-label">Password Length</label>
+                    <input type="text" class="form-control" id="passwordLength" placeholder="16" value="16" />
+                  </div>
+                  <div>
+                    <label for="password" class="form-label">Generated Password</label>
+                    <textarea class="form-control" readonly id="password" placeholder="Your Secure Password"
+                      aria-label="Generated Password" onclick="writePassword()"></textarea>
+                  </div>
+                </div>
+        
+                <!-- Card Footer & Generate Password Button -->
+                <div class="card-footer">
+                  <button id="generate" class="btn btn-outline-primary"><span>Generate Password</span></button>
+                  <button class="btn btn-outline-success" onclick="copyPassword()" id="liveAlertBtn">Add To Clipboard</button>
+                </div>
+              </div>
+        
+              <div id="liveAlertPlaceholder" class="mt-2"></div>
+        </div>
+       
+    </div>
+
+    <script src="bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
 </html>
