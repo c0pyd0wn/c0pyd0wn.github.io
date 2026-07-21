@@ -2,108 +2,1063 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
 
-    <link rel="stylesheet" href="bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.1/css/all.css">
-    <link rel="stylesheet" href="style.css">
-    <title>Dhasboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="An animated presentation about the natural regions of Peru.">
+
+  <title>Peru — Coast, Andes and Jungle</title>
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+
+  <!-- GSAP ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+  <!-- Lenis smooth scrolling -->
+  <script src="https://unpkg.com/lenis@1.1.16/dist/lenis.min.js" defer></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+
+  <!-- Main JavaScript -->
+  <script src="js/script.js" defer></script>
 </head>
 
 <body>
-    <div class="b1-container">
-        <!-- HEADER -->
-        <div class="b1-navbar navbar navbar-expand-md">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Soporte B1</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse bg-white" id="navbarScroll">
-                    <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                    </ul>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
-                </div>
+
+  <!-- Loading screen -->
+  <div class="loader" aria-hidden="true">
+    <div class="loader__content">
+      <span class="loader__label">Discover</span>
+      <h1><span style="color: red;">P</span><span style="color: white;">ER</span><span style="color: red;">U</span></h1>
+      <div class="loader__line">
+        <span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <a href="#desert" class="navbar__logo">
+      PERU
+    </a>
+
+    <nav aria-label="Main navigation">
+      <a href="#desert">Desert</a>
+      <a href="#andes">Andes</a>
+      <a href="#jungle">Jungle</a>
+    </nav>
+
+    <button class="menu-button" type="button" aria-label="Open navigation" aria-expanded="false">
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <main>
+
+
+
+
+
+<section class="chapter-break">
+    <div class="chapter-break__content">
+        <p class="chapter-break__eyebrow">
+            DISCOVER PERU
+        </p>
+        <h2 class="chapter-break__title">
+            Some Facts
+            <br>
+            <span>About Peru</span>
+        </h2>
+        <p class="chapter-break__subtitle">
+            A country of extraordinary landscapes,
+            rich history, and one of the world's most
+            fascinating ancient civilizations... and more.
+        </p>
+        <div class="chapter-break__scroll">
+            Scroll to continue
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+<!-- SECTION WITH IMAGE TO THE RIGHT-->
+ <!-- MAP OF PERU -->
+
+
+    <section class="split-presentation" id="heritage">
+      <div class="split-presentation__container">
+        <!-- Left-side text -->
+        <div class="split-presentation__content">
+          <p class="split-presentation__eyebrow">
+            Peru · MAP
+          </p>
+          <h2 class="split-presentation__title">
+  
+            <span>Map Of Peru</span>
+          </h2>
+
+          <p class="split-presentation__lead">
+            
+            <br /><br />
+              <span style='font-size:20px;'>&#9642;</span> The Coast (Costa). A narrow, dry desert strip bordering the Pacific Ocean.<br />
+              <span style='font-size:20px;'>&#9642;</span> The Highlands (Sierra).  The high-altitude Peruvian Andes. This terrain is home to the former Inca capital of Cusco, Machu Picchu, and Arequipa.<br />
+              <span style='font-size:20px;'>&#9642;</span> The Jungle (Selva). The Amazon, covering nearly 60% of Peru's landmass in the east.
+
+
+          </p>
+
+          <div class="split-presentation__facts-2">
+            <div class="split-fact">
+              <strong>~35M</strong>
+              <span>Population</span>
+            </div>
+            <div class="split-fact">
+              <strong>Spanish, Quechua and Aymara</strong>
+              <span>Official Languages</span>
+            </div>
+          </div>
+
+
+        </div>
+
+        <!-- Right-side image -->
+        <div class="split-presentation__media">
+          <div class="split-presentation__image-wrapper">
+            <img src="images/peru-map-terrain.jpg" alt="Peru Map"
+              class="split-presentation__image" loading="lazy">
+            <span class="split-presentation__caption">
+              Map or Peru
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+    <!-- Desert -->
+    <section class="panel" id="desert" data-section="01">
+      <div class="panel__media">
+        <img src="images/peru-desert-1.jpg" alt="Desert landscape on the Peruvian coast" class="panel__image">
+      </div>
+
+      <div class="panel__overlay"></div>
+
+      <div class="panel__content">
+        <p class="panel__eyebrow reveal-text">
+          Peru · Region Coast
+        </p>
+
+        <h1 class="panel__title">
+          <span class="title-line">
+            <span>The Desert</span>
+          </span>
+
+          <span class="title-line">
+            <span>Coast</span>
+          </span>
+        </h1>
+
+        <p class="panel__description reveal-text">
+          Vast dunes, ancient civilizations and dramatic
+          landscapes beside the Pacific Ocean.
+        </p>
+
+        <a href="#andes" class="panel__button reveal-text">
+          Explore the Andes
+          <span aria-hidden="true">↓</span>
+        </a>
+      </div>
+
+      <div class="panel__number" aria-hidden="true">
+        01
+      </div>
+
+      <div class="scroll-indicator" aria-hidden="true">
+        <span>Scroll</span>
+        <div class="scroll-indicator__line"></div>
+      </div>
+    </section>
+
+
+
+    <!-- Andes -->
+    <section class="panel" id="andes" data-section="02">
+      <div class="panel__media">
+        <img src="images/peru-andes-1.jpg" alt="Mountains and valleys in the Peruvian Andes" class="panel__image"
+          loading="lazy">
+      </div>
+
+      <div class="panel__overlay"></div>
+
+      <div class="panel__content">
+        <p class="panel__eyebrow reveal-text">
+          Peru · Region Andes
+        </p>
+
+        <h2 class="panel__title">
+          <span class="title-line">
+            <span>The Mighty</span>
+          </span>
+
+          <span class="title-line">
+            <span>Andes</span>
+          </span>
+        </h2>
+
+        <p class="panel__description reveal-text">
+          Snow-covered peaks, fertile valleys and the enduring
+          legacy of the Inca civilization.
+        </p>
+
+        <a href="#jungle" class="panel__button reveal-text">
+          Enter the Jungle
+          <span aria-hidden="true">↓</span>
+        </a>
+      </div>
+
+      <div class="panel__number" aria-hidden="true">
+        02
+      </div>
+    </section>
+
+
+
+    <!-- Jungle -->
+    <section class="panel" id="jungle" data-section="03">
+      <div class="panel__media">
+        <img src="images/peru-jungle-1.jpg" alt="Dense vegetation in the Peruvian Amazon jungle" class="panel__image"
+          loading="lazy">
+      </div>
+
+      <div class="panel__overlay"></div>
+
+      <div class="panel__content">
+        <p class="panel__eyebrow reveal-text">
+          Peru · Region Jungle
+        </p>
+
+        <h2 class="panel__title">
+          <span class="title-line">
+            <span>The Amazon</span>
+          </span>
+
+          <span class="title-line">
+            <span>Jungle</span>
+          </span>
+        </h2>
+
+        <p class="panel__description reveal-text">
+          A world of rivers, tropical forests and extraordinary
+          biodiversity extending across eastern Peru.
+        </p>
+
+        <a href="#desert" class="panel__button reveal-text">
+          Return to the Beginning
+          <span aria-hidden="true">↑</span>
+        </a>
+      </div>
+
+      <div class="panel__number" aria-hidden="true">
+        03
+      </div>
+    </section>
+
+
+
+
+<!-- FROM Beginning-->
+
+<section class="chapter-break">
+    <div class="chapter-break__content">
+        <p class="chapter-break__eyebrow">
+            DISCOVER PERU
+        </p>
+        <h2 class="chapter-break__title">
+            Let's Start 
+            <br>
+            <span>From The Beginning</span>
+        </h2>
+        <p class="chapter-break__subtitle">
+            A brief summary of history
+        </p>
+        <div class="chapter-break__scroll">
+            Scroll to continue
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- SECTION WITH IMAGE TO THE RIGHT-->
+
+
+    <section class="split-presentation" id="heritage">
+      <div class="split-presentation__container">
+        <!-- Left-side text -->
+        <div class="split-presentation__content">
+          <p class="split-presentation__eyebrow">
+            Peru · HISTORY
+          </p>
+          <h2 class="split-presentation__title">
+            Inca Civilization
+            <span>Still Alive</span>
+          </h2>
+
+          <p class="split-presentation__lead">
+            The Sun God, Inti, looked down on a world where people walked without wisdom, law, or peace. He was sorry
+            for them and decided to guide humankind to light and order.
+            <br /><br />He sent his two sons, Manco Cápac and Mama Ocllo.
+          </p>
+
+          <p class="split-presentation__text">
+          </p>
+
+          <div class="split-presentation__facts">
+            <div class="split-fact">
+              <strong>3</strong>
+              <span>Natural regions</span>
+            </div>
+            <div class="split-fact">
+              <strong>5,000+</strong>
+              <span>Years of history</span>
+            </div>
+            <div class="split-fact">
+              <strong>48</strong>
+              <span>Indigenous languages</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right-side image -->
+        <div class="split-presentation__media">
+          <div class="split-presentation__image-wrapper">
+            <img src="images/capac-ocllo.png" alt="Historic cultural landscape in Peru"
+              class="split-presentation__image" loading="lazy">
+            <span class="split-presentation__caption">
+              Manco Capac and Mama Ocllo leaving Lake Titicaca, Peru - Bolivia
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+
+
+    <!-- SECTION WITH IMAGE TO THE LEFT -->
+
+
+    <section class="split-presentation split-presentation--image-left" id="landscape">
+    <div class="split-presentation__container">
+
+        <!-- Image on the left -->
+        <div class="split-presentation__media">
+
+            <div class="split-presentation__image-wrapper">
+
+                <img
+                    src="images/inca-empire-map2.png" alt="The Andes mountains in Peru" class="split-presentation__image" loading="lazy">
+
+                <span class="split-presentation__caption">
+                    The Inca Territory
+                </span>
             </div>
         </div>
-        <!-- END HEADER -->
 
-        <!-- ASIDE -->
-        <div class="b1-aside">
-            <ul class="navbar-nav flex-column">
-                <li class="nav-item px-2 my-1">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item px-2 my-1">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item px-2 my-1">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-            </ul>
+        <!-- Text on the right -->
+        <div class="split-presentation__content">
+
+            <p class="split-presentation__eyebrow">
+                Peru · HISTORY
+            </p>
+
+            <h2 class="split-presentation__title">
+                The Inca Territory
+                <span>(Tawantinsuyu)</span>
+            </h2>
+
+            <p class="split-presentation__lead">
+                At its greatest extent during the 15th and early 16th centuries, the Inca Empire—known as Tawantinsuyu, meaning "The Four Regions"—was the largest empire ever established in pre-Columbian America.
+            </p>
+
+            <p class="split-presentation__text">
+                Included parts of today's: Colombia, Ecuador, Peru, Bolivia, Chile and Argentina.
+            </p>
+
+            <div class="split-presentation__facts">
+                <div class="split-fact">
+                    <strong>4,000</strong>
+                    <span>km Along the Andes</span>
+                </div>
+                <div class="split-fact">
+                    <strong>2M </strong>
+                    <span>km<sup>2</sup> Covered</span>
+                </div>
+                <div class="split-fact">
+                    <strong>30,000</strong>
+                    <span>km of Roads crossing mountains, deserts, and forests.</span>
+                </div>
+
+            </div>
+
         </div>
-        <!-- END ASIDE -->
 
-        <div class="b1-main">
-
-            <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
-                aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Library</li>
-                </ol>
-            </nav>
-
-
-            <p>Resize the browser window to fire the <code>resize</code> event.</p>
-            <p>Window height: <span id="height"></span></p>
-            <p>Window width: <span id="width"></span></p>
-
-            <div class="card">
-                <!-- Card Header -->
-                <div class="card-header">
-                  <h5>Generate a Password</h5>
-                </div>
-        
-                <!-- Parent Container & Pass Text -->
-                <div class="card-body">
-                  <div class="mb-3"><label for="passwordLength" class="form-label">Password Length</label>
-                    <input type="text" class="form-control" id="passwordLength" placeholder="16" value="16" />
-                  </div>
-                  <div>
-                    <label for="password" class="form-label">Generated Password</label>
-                    <textarea class="form-control" readonly id="password" placeholder="Your Secure Password"
-                      aria-label="Generated Password" onclick="writePassword()"></textarea>
-                  </div>
-                </div>
-        
-                <!-- Card Footer & Generate Password Button -->
-                <div class="card-footer">
-                  <button id="generate" class="btn btn-outline-primary"><span>Generate Password</span></button>
-                  <button class="btn btn-outline-success" onclick="copyPassword()" id="liveAlertBtn">Add To Clipboard</button>
-                </div>
-              </div>
-        
-              <div id="liveAlertPlaceholder" class="mt-2"></div>
-        </div>
-       
     </div>
+</section>
 
-    <script src="bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
+
+
+
+
+
+
+<!-- SECTION WITH IMAGE TO THE RIGHT-->
+
+
+    <section class="split-presentation" id="heritage">
+      <div class="split-presentation__container">
+        <!-- Left-side text -->
+        <div class="split-presentation__content">
+          <p class="split-presentation__eyebrow">
+            Peru · HISTORY
+          </p>
+          <h2 class="split-presentation__title">
+  
+            <span>The Empire Became Weak</span>
+          </h2>
+
+          <p class="split-presentation__lead">
+            Before the Spanish arrived to Peru, the Incas had many problems.
+            <br /><br />
+            
+              <span style='font-size:20px;'>&#9642;</span> European diseases killed many people.<br />
+              <span style='font-size:20px;'>&#9642;</span> The Inca Huayna Capac died.<br />
+              <span style='font-size:20px;'>&#9642;</span> His sons, Atahualpa and Huáscar, fought for power.<br />
+              <span style='font-size:20px;'>&#9642;</span> This civil war divided the empire.<br />
+              <span style='font-size:20px;'>&#9642;</span> Atahualpa won, but the war left the Incas weak.
+
+          </p>
+
+          <p class="split-presentation__text">
+          </p>
+
+
+
+        </div>
+
+        <!-- Right-side image -->
+        <div class="split-presentation__media">
+          <div class="split-presentation__image-wrapper">
+            <img src="images/atahualpa-huascas.png" alt="Historic cultural landscape in Peru"
+              class="split-presentation__image" loading="lazy">
+            <span class="split-presentation__caption">
+              Fight between Atahualpa and Huascar
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+
+
+
+
+
+
+    <!-- SECTION WITH IMAGE TO THE RIGHT-->
+
+
+    <section class="split-presentation" id="heritage">
+      <div class="split-presentation__container">
+        <!-- Left-side text -->
+        <div class="split-presentation__content">
+          <p class="split-presentation__eyebrow">
+            Peru · HISTORY
+          </p>
+          <h2 class="split-presentation__title">
+  
+            <span>Francisco Pizarro Arrives</span>
+          </h2>
+
+          <p class="split-presentation__lead">
+            Francisco Pizarro was a Spanish conqueror.
+            <br /><br />
+              <span style='font-size:20px;'>&#9642;</span> He came to Peru looking for land, gold, and power.<br />
+              <span style='font-size:20px;'>&#9642;</span> In 1532, he entered the Inca Empire.<br />
+              <span style='font-size:20px;'>&#9642;</span> He had about 160–170 Spanish soldiers.<br />
+              <span style='font-size:20px;'>&#9642;</span> The Spanish had horses, steel swords, guns, and small cannons.<br />
+              <span style='font-size:20px;'>&#9642;</span> Pizarro also received help from Indigenous groups who opposed Inca rule.
+
+          </p>
+
+          <p class="split-presentation__text">
+          </p>
+
+
+        </div>
+
+        <!-- Right-side image -->
+        <div class="split-presentation__media">
+          <div class="split-presentation__image-wrapper">
+            <img src="images/pizarro-arrives.png" alt="Historic cultural landscape in Peru"
+              class="split-presentation__image" loading="lazy">
+            <span class="split-presentation__caption">
+              Pizarro arrives
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+
+
+    <!-- SECTION WITH IMAGE TO THE RIGHT-->
+
+
+    <section class="split-presentation" id="heritage">
+      <div class="split-presentation__container">
+        <!-- Left-side text -->
+        <div class="split-presentation__content">
+          <p class="split-presentation__eyebrow">
+            Peru · HISTORY
+          </p>
+          <h2 class="split-presentation__title">
+  
+            <span>Pizarro meets Atahualpa</span>
+          </h2>
+
+          <p class="split-presentation__lead">
+            On November 16, 1532, Pizarro met Atahualpa in Cajamarca.
+            <br /><br />
+              <span style='font-size:20px;'>&#9642;</span> Atahualpa arrived with many followers.<br />
+              <span style='font-size:20px;'>&#9642;</span> Most of them had no weapons.<br />
+              <span style='font-size:20px;'>&#9642;</span> The Spanish hid around the city square.<br />
+              <span style='font-size:20px;'>&#9642;</span> They made a surprise attack.<br />
+              <span style='font-size:20px;'>&#9642;</span> Many Incas were killed and Atahualpa was captured.
+
+          </p>
+
+          <p class="split-presentation__text">
+          </p>
+
+
+        </div>
+
+        <!-- Right-side image -->
+        <div class="split-presentation__media">
+          <div class="split-presentation__image-wrapper">
+            <img src="images/pizarro-atahualpa2.png" alt="Historic cultural landscape in Peru"
+              class="split-presentation__image" loading="lazy">
+            <span class="split-presentation__caption">
+              Pizarro meets Atahualpa
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+
+
+
+
+
+
+    <!-- INDEPENDENCE -->
+     <section class="chapter-break">
+    <div class="chapter-break__content">
+        <p class="chapter-break__eyebrow">
+            DISCOVER PERU
+        </p>
+        <h2 class="chapter-break__title">
+            1821: Freedom
+            <br>
+            <span></span>
+        </h2>
+        <p class="chapter-break__subtitle">
+            July 28th - 205 Years of The Independence of Peru
+        </p>
+        <div class="chapter-break__scroll">
+            Scroll to continue
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+<!-- SECTION WITH IMAGE TO THE RIGHT-->
+
+
+    <section class="split-presentation" id="heritage">
+      <div class="split-presentation__container">
+        <!-- Left-side text -->
+        <div class="split-presentation__content">
+          <p class="split-presentation__eyebrow">
+            Peru · HISTORY
+          </p>
+          <h2 class="split-presentation__title">
+  
+            <span>Independence</span>
+          </h2>
+
+          <p class="split-presentation__lead">
+            After many years as a Spanish colony
+            <br /><br />
+            
+              <span style='font-size:20px;'>&#9642;</span> Argentine General José de San Martín liberated Lima and formally proclaimed Peru's independence on July 28, 1821.<br />
+              <span style='font-size:20px;'>&#9642;</span> The decisive final victories against Spanish royalist forces were secured by Simón Bolívar at the Battles of Junín and Ayacucho in 1824<br />
+
+
+          </p>
+
+          <p class="split-presentation__text">
+          </p>
+
+
+
+        </div>
+
+        <!-- Right-side image -->
+        <div class="split-presentation__media">
+          <div class="split-presentation__image-wrapper">
+            <img src="images/independence.png" alt="Historic cultural landscape in Peru"
+              class="split-presentation__image" loading="lazy">
+            <span class="split-presentation__caption">
+              Independence of Peru - 1821
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+
+
+
+    <!-- INDEPENDENCE -->
+     <section class="chapter-break">
+    <div class="chapter-break__content">
+        <p class="chapter-break__eyebrow">
+            DISCOVER PERU
+        </p>
+        <h2 class="chapter-break__title">
+            Let's do some serious facts to this presentation.
+            <br>
+            <span></span>
+        </h2>
+        <p class="chapter-break__subtitle">
+            Food and Tourism
+        </p>
+        <div class="chapter-break__scroll">
+            Scroll to continue
+        </div>
+    </div>
+</section>
+
+    
+
+
+
+
+
+
+
+
+
+    <!-- BEGINNING OF SCROLL -->
+
+    <section class="story-carousel" id="gallery">
+      <div class="swiper story-swiper">
+        <div class="swiper-wrapper">
+          <!-- Slide 1 -->
+          <article class="swiper-slide story-slide">
+            <div class="story-slide__media">
+              <img src="images/ceviche.jpg" alt="Historic landscape of Peru" class="story-slide__image">
+            </div>
+            <div class="story-slide__overlay"></div>
+
+            <div class="story-slide__content">
+
+              <p class="story-slide__eyebrow">
+                Peru · Food and Tourism
+              </p>
+
+              <h2 class="story-slide__title">
+                Ceviche
+              </h2>
+
+              <p class="story-slide__description">
+                Peruvian ceviche is Peru's national dish, consisting of fresh raw fish diced and cured briefly in lime juice (leche de tigre).
+              </p>
+
+            </div>
+
+            <span class="story-slide__number" aria-hidden="true">
+              01
+            </span>
+
+          </article>
+
+          <!-- Slide 2 -->
+          <article class="swiper-slide story-slide">
+
+            <div class="story-slide__media">
+              <img src="images/lomo.jpg" alt="" class="story-slide__image">
+            </div>
+
+            <div class="story-slide__overlay"></div>
+
+            <div class="story-slide__content">
+
+              <p class="story-slide__eyebrow">
+                Peru · Chapter 02
+              </p>
+
+              <h2 class="story-slide__title">
+                Lomo Saltado
+              </h2>
+
+              <p class="story-slide__description">
+                A classic Peruvian stir-fry that beautifully marries Chinese wok techniques with indigenous South American ingredients
+              </p>
+
+            </div>
+
+            <span class="story-slide__number" aria-hidden="true">
+              02
+            </span>
+
+          </article>
+
+          <!-- Slide 3 -->
+          <article class="swiper-slide story-slide">
+
+            <div class="story-slide__media">
+              <img src="images/anticucho.jpg" alt="Tropical environment in the Peruvian Amazon"
+                class="story-slide__image">
+            </div>
+
+            <div class="story-slide__overlay"></div>
+
+            <div class="story-slide__content">
+
+              <p class="story-slide__eyebrow">
+                Peru · Chapter 03
+              </p>
+
+              <h2 class="story-slide__title">
+                Anticuchos
+              </h2>
+
+              <p class="story-slide__description">
+                Anticuchos are iconic Peruvian grilled skewers, traditionally made from marinated beef heart.
+              </p>
+
+            </div>
+
+            <span class="story-slide__number" aria-hidden="true">
+              03
+            </span>
+
+          </article>
+
+        </div>
+
+        <!-- Navigation arrows -->
+        <button class="story-arrow story-arrow--previous" type="button" aria-label="Previous slide">
+          <span aria-hidden="true">←</span>
+        </button>
+
+        <button class="story-arrow story-arrow--next" type="button" aria-label="Next slide">
+          <span aria-hidden="true">→</span>
+        </button>
+
+        <!-- Progress and pagination -->
+        <div class="story-carousel__footer">
+
+          <div class="story-carousel__progress">
+            <span class="story-carousel__progress-bar"></span>
+          </div>
+
+          <div class="story-carousel__pagination"></div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- END OF SCROLL -->
+
+
+
+
+
+     <!-- INDEPENDENCE -->
+     <section class="chapter-break">
+    <div class="chapter-break__content">
+        <p class="chapter-break__eyebrow">
+            DISCOVER PERU
+        </p>
+        <h2 class="chapter-break__title">
+            Let's get more serious.
+            <br>
+            <span></span>
+        </h2>
+        <p class="chapter-break__subtitle">
+            Food and Tourism
+        </p>
+        <div class="chapter-break__scroll">
+            Scroll to continue
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+<!-- BEGINNING OF SCROLL -->
+
+    <section class="story-carousel" id="gallery">
+      <div class="swiper story-swiper">
+        <div class="swiper-wrapper">
+          <!-- Slide 1 -->
+          <article class="swiper-slide story-slide">
+            <div class="story-slide__media">
+              <img src="images/machu.jpg" alt="Historic landscape of Peru" class="story-slide__image">
+            </div>
+            <div class="story-slide__overlay"></div>
+
+            <div class="story-slide__content">
+
+              <p class="story-slide__eyebrow">
+                Peru · Food and Tourism
+              </p>
+
+              <h2 class="story-slide__title">
+                Machu Picchu
+              </h2>
+
+              <p class="story-slide__description">
+                Built around 1450, this UNESCO World Heritage Site is famous for its dry-stone walls, agricultural terraces, and stunning astronomical alignments. It likely served as a royal estate and religious sanctuary before being abandoned.
+              </p>
+
+            </div>
+
+            <span class="story-slide__number" aria-hidden="true">
+              01
+            </span>
+
+          </article>
+
+          <!-- Slide 2 -->
+          <article class="swiper-slide story-slide">
+
+            <div class="story-slide__media">
+              <img src="images/lima-plaza.jpg" alt="" class="story-slide__image">
+            </div>
+
+            <div class="story-slide__overlay"></div>
+
+            <div class="story-slide__content">
+
+              <p class="story-slide__eyebrow">
+                Peru · Chapter 02
+              </p>
+
+              <h2 class="story-slide__title">
+                Cathedral Basilica of Lima
+              </h2>
+
+              <p class="story-slide__description">
+                Located on the Plaza de Armas, is a grand Roman Catholic church founded by conquistador Francisco Pizarro in 1535
+              </p>
+
+            </div>
+
+            <span class="story-slide__number" aria-hidden="true">
+              02
+            </span>
+
+          </article>
+
+          <!-- Slide 3 -->
+          <article class="swiper-slide story-slide">
+
+            <div class="story-slide__media">
+              <img src="images/lima-peru.jpg" alt="Tropical environment in the Peruvian Amazon"
+                class="story-slide__image">
+            </div>
+
+            <div class="story-slide__overlay"></div>
+
+            <div class="story-slide__content">
+
+              <p class="story-slide__eyebrow">
+                Peru · Food and Tourism
+              </p>
+
+              <h2 class="story-slide__title">
+                Lima
+              </h2>
+
+              <p class="story-slide__description">
+                Lima is the capital and largest city of Peru. Founded in 1535. 
+              </p>
+
+            </div>
+
+            <span class="story-slide__number" aria-hidden="true">
+              03
+            </span>
+
+          </article>
+
+
+
+
+          <!-- Slide 3 -->
+          <article class="swiper-slide story-slide">
+
+            <div class="story-slide__media">
+              <img src="images/amazon.jpg" alt="Tropical environment in the Peruvian Amazon"
+                class="story-slide__image">
+            </div>
+
+            <div class="story-slide__overlay"></div>
+
+            <div class="story-slide__content">
+
+              <p class="story-slide__eyebrow">
+                Peru · Food and Tourism
+              </p>
+
+              <h2 class="story-slide__title">
+                The Amazon River
+              </h2>
+
+              <p class="story-slide__description">
+                The largest river in the world by water volume and the second-longest (often rivaling the Nile)
+              </p>
+
+            </div>
+
+            <span class="story-slide__number" aria-hidden="true">
+              04
+            </span>
+
+          </article>
+
+
+
+
+        </div>
+
+        <!-- Navigation arrows -->
+        <button class="story-arrow story-arrow--previous" type="button" aria-label="Previous slide">
+          <span aria-hidden="true">←</span>
+        </button>
+
+        <button class="story-arrow story-arrow--next" type="button" aria-label="Next slide">
+          <span aria-hidden="true">→</span>
+        </button>
+
+        <!-- Progress and pagination -->
+        <div class="story-carousel__footer">
+
+          <div class="story-carousel__progress">
+            <span class="story-carousel__progress-bar"></span>
+          </div>
+
+          <div class="story-carousel__pagination"></div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- END OF SCROLL -->
+
+
+
+
+
+        <!-- INDEPENDENCE -->
+     <section class="chapter-break">
+    <div class="chapter-break__content">
+        <p class="chapter-break__eyebrow">
+            DISCOVER PERU
+        </p>
+        <h2 class="chapter-break__title">
+            The End
+            <br>
+            <span></span>
+        </h2>
+        <p class="chapter-break__subtitle">
+       
+        </p>
+        <div class="chapter-break__scroll">
+            Scroll to continue
+        </div>
+    </div>
+</section>
+
+
+
+  </main>
+
 </body>
 
 </html>
