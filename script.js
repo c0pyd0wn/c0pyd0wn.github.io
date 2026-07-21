@@ -1,182 +1,736 @@
-const heightOutput = document.querySelector("#height");
-const widthOutput = document.querySelector("#width");
+document.addEventListener("DOMContentLoaded", () => {
+    gsap.registerPlugin(ScrollTrigger);
 
-function updateSize() {
-  heightOutput.textContent = window.innerHeight;
-  widthOutput.textContent = window.innerWidth;
+    const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    document.body.classList.add("is-loading");
+
+    /*
+     * Lenis smooth scrolling
+     */
+    let lenis;
+
+    if (!prefersReducedMotion) {
+        lenis = new Lenis({
+            duration: 1.2,
+            smoothWheel: true,
+            wheelMultiplier: 0.9,
+            touchMultiplier: 1.5
+        });
+
+        lenis.on("scroll", ScrollTrigger.update);
+
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000);
+        });
+
+        gsap.ticker.lagSmoothing(0);
+    }
+
+    /*
+     * Loading animation
+     */
+    const loaderTimeline = gsap.timeline({
+        onComplete: () => {
+            document.body.classList.remove("is-loading");
+            document.querySelector(".loader").remove();
+
+            ScrollTrigger.refresh();
+        }
+    });
+
+    if (prefersReducedMotion) {
+        loaderTimeline
+            .set(".loader", { display: "none" })
+            .call(() => {
+                document.body.classList.remove("is-loading");
+                document.querySelector(".loader")?.remove();
+            });
+    } else {
+        loaderTimeline
+            .to(".loader__line span", {
+                scaleX: 1,
+                duration: 3,
+                ease: "power2.inOut"
+            })
+            .to(".loader__label", {
+                opacity: 0,
+                y: -10,
+                duration: 0.4
+            })
+            .to(
+                ".loader h1",
+                {
+                    opacity: 0,
+                    y: -30,
+                    duration: 0.6,
+                    ease: "power3.in"
+                },
+                "<"
+            )
+            .to(".loader", {
+                yPercent: -100,
+                duration: 1,
+                ease: "power4.inOut"
+            })
+            .from(
+                ".navbar",
+                {
+                    y: -100,
+                    opacity: 0,
+                    duration: 0.8,
+                    ease: "power3.out"
+                },
+                "-=0.35"
+            );
+    }
+
+    /*
+     * Create animations for each presentation panel
+     */
+    const panels = gsap.utils.toArray(".panel");
+
+    panels.forEach((panel, index) => {
+        const image = panel.querySelector(".panel__image");
+        const titleLines = panel.querySelectorAll(".title-line > span");
+        const revealItems = panel.querySelectorAll(".reveal-text");
+        const number = panel.querySelector(".panel__number");
+
+        if (prefersReducedMotion) {
+            gsap.set(titleLines, { yPercent: 0 });
+            gsap.set(revealItems, {
+                opacity: 1,
+                y: 0
+            });
+
+            return;
+        }
+
+        /*
+         * Text entrance animation
+         */
+        const contentTimeline = gsap.timeline({
+            scrollTrigger: {
+                trigger: panel,
+        start: index === 0 ? "top 80%" : "top 65%",
+        once: true
+            }
+        });
+
+        contentTimeline
+            .to(titleLines, {
+                yPercent: -110,
+                duration: 0
+            })
+            .to(titleLines, {
+                yPercent: 0,
+                duration: 1.2,
+                stagger: 0.3,
+                ease: "power4.out"
+            })
+            .to(
+                revealItems,
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.9,
+                    stagger: 0.14,
+                    ease: "power3.out"
+                },
+                "-=0.75"
+            );
+
+        /*
+         * Image zoom and parallax
+         */
+        gsap.fromTo(
+            image,
+            {
+                scale: 1.12,
+                yPercent: -4
+            },
+            {
+                scale: 1.02,
+                yPercent: 4,
+                ease: "none",
+
+                scrollTrigger: {
+                    trigger: panel,
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: 1.2
+                }
+            }
+        );
+
+        /*
+         * Section number movement
+         */
+        gsap.fromTo(
+            number,
+            {
+                yPercent: 30,
+                opacity: 0
+            },
+            {
+                yPercent: -15,
+                opacity: 1,
+                ease: "none",
+
+                scrollTrigger: {
+                    trigger: panel,
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: true
+                }
+            }
+        );
+
+        /*
+         * Fade content while leaving section
+         */
+        gsap.to(panel.querySelector(".panel__content"), {
+            opacity: 0,
+            y: -80,
+            ease: "none",
+
+            scrollTrigger: {
+                trigger: panel,
+                start: "65% top",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+    });
+
+    /*
+     * Smooth navigation links
+     */
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+        link.addEventListener("click", (event) => {
+            const targetSelector = link.getAttribute("href");
+            const target = document.querySelector(targetSelector);
+
+            if (!target) {
+                return;
+            }
+
+            event.preventDefault();
+
+            if (lenis) {
+                lenis.scrollTo(target, {
+                    offset: 0,
+                    duration: 1.5
+                });
+            } else {
+                target.scrollIntoView({
+                    behavior: "smooth"
+                });
+            }
+
+            closeMobileMenu();
+        });
+    });
+
+    /*
+     * Mobile navigation
+     */
+    const menuButton = document.querySelector(".menu-button");
+    const navigation = document.querySelector(".navbar nav");
+
+    function closeMobileMenu() {
+        navigation.classList.remove("is-open");
+        menuButton.setAttribute("aria-expanded", "false");
+    }
+
+    menuButton.addEventListener("click", () => {
+        const isOpen = navigation.classList.toggle("is-open");
+
+        menuButton.setAttribute(
+            "aria-expanded",
+            String(isOpen)
+        );
+    });
+
+    /*
+     * Refresh ScrollTrigger after all images load
+     */
+    window.addEventListener("load", () => {
+        ScrollTrigger.refresh();
+    });
+
+    window.addEventListener("resize", () => {
+        closeMobileMenu();
+        ScrollTrigger.refresh();
+    });
+
+
+
+
+
+    
+/*
+ * Full-width story carousel
+ */
+const storyCarouselElement = document.querySelector(".story-swiper");
+
+if (storyCarouselElement) {
+    const progressBar = document.querySelector(
+        ".story-carousel__progress-bar"
+    );
+
+    function animateStorySlide(slide) {
+        if (!slide) {
+            return;
+        }
+
+        const image = slide.querySelector(".story-slide__image");
+        const eyebrow = slide.querySelector(".story-slide__eyebrow");
+        const title = slide.querySelector(".story-slide__title");
+        const description = slide.querySelector(
+            ".story-slide__description"
+        );
+        const number = slide.querySelector(".story-slide__number");
+
+        gsap.killTweensOf([
+            image,
+            eyebrow,
+            title,
+            description,
+            number
+        ]);
+
+        const slideTimeline = gsap.timeline();
+
+        slideTimeline
+            .fromTo(
+                image,
+                {
+                    scale: 1.16
+                },
+                {
+                    scale: 1.04,
+                    duration: 2.4,
+                    ease: "power2.out"
+                }
+            )
+            .fromTo(
+                eyebrow,
+                {
+                    opacity: 0,
+                    y: 35
+                },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: "power3.out"
+                },
+                "-=1.9"
+            )
+            .fromTo(
+                title,
+                {
+                    opacity: 0,
+                    y: 80
+                },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.8,
+                    ease: "power4.out"
+                },
+                "-=1.65"
+            )
+            .fromTo(
+                description,
+                {
+                    opacity: 0,
+                    y: 45
+                },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.25,
+                    ease: "power3.out"
+                },
+                "-=0.95"
+            )
+            .fromTo(
+                number,
+                {
+                    opacity: 0,
+                    y: 35
+                },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: "power2.out"
+                },
+                "-=1"
+            );
+    }
+
+    function resetInactiveStorySlides(swiper) {
+        swiper.slides.forEach((slide, index) => {
+            if (index === swiper.activeIndex) {
+                return;
+            }
+
+            gsap.set(
+                slide.querySelector(".story-slide__eyebrow"),
+                {
+                    opacity: 0,
+                    y: 35
+                }
+            );
+
+            gsap.set(
+                slide.querySelector(".story-slide__title"),
+                {
+                    opacity: 0,
+                    y: 80
+                }
+            );
+
+            gsap.set(
+                slide.querySelector(".story-slide__description"),
+                {
+                    opacity: 0,
+                    y: 45
+                }
+            );
+
+            gsap.set(
+                slide.querySelector(".story-slide__number"),
+                {
+                    opacity: 0,
+                    y: 35
+                }
+            );
+
+            gsap.set(
+                slide.querySelector(".story-slide__image"),
+                {
+                    scale: 1.16
+                }
+            );
+        });
+    }
+
+    const storyCarousel = new Swiper(".story-swiper", {
+        slidesPerView: 1,
+        speed: 1100,
+        loop: false,
+        grabCursor: true,
+        keyboard: {
+            enabled: true
+        },
+        navigation: {
+            nextEl: ".story-arrow--next",
+            prevEl: ".story-arrow--previous"
+        },
+        pagination: {
+            el: ".story-carousel__pagination",
+            type: "fraction",
+            formatFractionCurrent(number) {
+                return String(number).padStart(2, "0");
+            },
+            formatFractionTotal(number) {
+                return String(number).padStart(2, "0");
+            }
+        },
+        effect: "slide",
+        on: {
+            init(swiper) {
+                resetInactiveStorySlides(swiper);
+
+                animateStorySlide(
+                    swiper.slides[swiper.activeIndex]
+                );
+
+                gsap.set(progressBar, {
+                    scaleX: 1 / swiper.slides.length
+                });
+            },
+
+            slideChangeTransitionStart(swiper) {
+                resetInactiveStorySlides(swiper);
+
+                const progress =
+                    (swiper.activeIndex + 1) /
+                    swiper.slides.length;
+
+                gsap.to(progressBar, {
+                    scaleX: progress,
+                    duration: 1,
+                    ease: "power3.inOut"
+                });
+            },
+
+            slideChangeTransitionEnd(swiper) {
+                animateStorySlide(
+                    swiper.slides[swiper.activeIndex]
+                );
+            }
+        }
+    });
 }
 
-updateSize();
-window.addEventListener("resize", updateSize);
-
-
-
-
-// passwordOptions contains all necessary string data needed to generate the password
-const passwordOptions = {
-  num: "1234567890",
-  specialChar: "@#$&_",
-  lowerCase: "abcdefghijkmnopqrstuvwxyz",
-  upperCase: "ABCDEFGHJKLMNPQRSTUVWXYZ"
-};
-
-// Executes when button is clicked
-let generatePassword = function () {
-
-  // initial state for password information
-  let passInfo = "";
-
-  // list of chosen characters
-  const passChars = [];
-
-  // ask user for the length of their password
-  let passwordLength = document.getElementById("passwordLength");
-
-  let characterAmount = passwordLength.value; // window.prompt("Enter the amount of characters you want for your password. NOTE: Must be between 8-128 characters");
-
-  // If the character length doesn't match requirements, alert the user
-  if (characterAmount >= 8 && characterAmount < 129) {
-
-      // ask if user wants to include integers
-      const getInteger = true; //window.confirm("Would you like to include NUMBERS?");
-
-
-
-      // if user wants to include numbers
-      if (getInteger) {
-          // add numerical characters to password data 
-          passInfo += passwordOptions.num;
-          // add a number to the array of chosen characters
-          passChars.push(getRandomChar(passwordOptions.num));
-      };
-
-      // ask if user wants to include special characters
-      const getSpecialCharacters = true; // window.confirm("Would you like to include SPECIAL characters?");
-
-      // if user wants to include special characters 
-      if (getSpecialCharacters) {
-          // add special characters to password data
-          passInfo += passwordOptions.specialChar;
-          // add a special character to the array of chosen characters
-          passChars.push(getRandomChar(passwordOptions.specialChar));
-      };
-
-      // ask if user wants to include lowercase characters
-      const getLowerCase = true; //window.confirm("Would you like to include LOWERCASE characters?");
-
-      // if user wants to include lowercase characters
-      if (getLowerCase) {
-          // add lowercase characters to password data
-          passInfo += passwordOptions.lowerCase;
-          // add a lowercase character to the list of chosen characters
-          passChars.push(getRandomChar(passwordOptions.lowerCase));
-      };
-
-      // ask if user wants to include uppercase characters
-      const getUpperCase = true; // window.confirm("Would you like to include UPPERCASE characters?");
-
-      // if user wants to include uppercase characters
-      if (getUpperCase) {
-          // add uppercase characters to password data 
-          passInfo += passwordOptions.upperCase;
-          // add a uppercase character to the list of chosen characters
-          passChars.push(getRandomChar(passwordOptions.upperCase));
-      };
-
-      // if passInfo is empty then ensure the user chooses at least one option
-      if (!passInfo) {
-          // notify user needs to select at least one option
-          window.alert("You need to select at least one option, please try again!");
-          // return user back to their questions
-          return generatePassword();
-      };
-
-      // while/if there aren't enough characters 
-      while (passChars.length < characterAmount) {
-          // pick a random character from passInfo
-          passChars.push(getRandomChar(passInfo));
-      };
-
-      // shuffling the list of characters using Fisher-Yates algorithm
-      for (let i = passChars.length - 1; i > 0; i--) {
-          const swapIndex = Math.floor(Math.random() * (i + 1));
-          const temp = passChars[i];
-          passChars[i] = passChars[swapIndex];
-          passChars[swapIndex] = temp;
-      };
-
-      // return the password character array concatenated to a string
-      return passChars.join("");
-  }
-  // if user's response is invalid
-  else {
-      // alert user
-      window.alert("You need to provide a valid length!");
-      // return user back to initialState
-      return initialState;
-  }
-};
-
-// getRandomChar pulls from the passChars array, fromString processes the value
-let getRandomChar = function (fromString) {
-  return fromString[Math.floor(Math.random() * fromString.length)];
-}
-
-// References to the #generate element
-let generateBtn = document.querySelector("#generate");
-
-// Write password to the #password input
-function writePassword() {
-  // Take the password data from generatePassword(); and store it into a variable
-  let password = generatePassword();
-  // passwordText contains data that's connected to the css file
-  let passwordText = document.querySelector("#password");
-
-  // Clear
-  document.getElementById("liveAlertPlaceholder").innerHTML = "";
-
-  // The data within the password variable is then stored into passwordText.value, so the stringed data can be displayed
-  passwordText.value = password;
-}
-
-// The event listener looks for a click to then look at the function writePassword
-generateBtn.addEventListener("click", writePassword);
-
-// Connected to Add To Clipboard button, will copy any text within the textarea
-let copyPassword = function () {
-  // textarea's id value is tied to copyPass
-  const copyPass = document.getElementById("password");
-  // Add the value of copyPass into clipboard
-  navigator.clipboard.writeText(copyPass.value);
-  // Notify user
-  // window.alert("Your password has been copied!");
-}
 
 
 
 
 
-const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
 
-const appendAlert = (message, type) => {
-  const wrapper = document.createElement('div')
-  wrapper.innerHTML = [
-      `<div class="alert alert-${type} alert-dismissible" role="alert">`,
-      `   <div>${message}</div>`,
-      '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-      '</div>'
-  ].join('')
+// begin presentation
 
-  alertPlaceholder.append(wrapper);
-}
+/*
+ * Split presentation section
+ */
 
-const alertTrigger = document.getElementById('liveAlertBtn')
-if (alertTrigger) {
-  alertTrigger.addEventListener('click', () => {
 
-      // Clear previous alert
-      document.getElementById("liveAlertPlaceholder").innerHTML = "";
+/*
+ * Animate every split presentation section
+ */
+const splitSections = document.querySelectorAll(
+    ".split-presentation"
+);
 
-      appendAlert('Your password has been copied!', 'success')
-  })
+splitSections.forEach((splitSection) => {
+    const eyebrow = splitSection.querySelector(
+        ".split-presentation__eyebrow"
+    );
+
+    const title = splitSection.querySelector(
+        ".split-presentation__title"
+    );
+
+    const lead = splitSection.querySelector(
+        ".split-presentation__lead"
+    );
+
+    const text = splitSection.querySelector(
+        ".split-presentation__text"
+    );
+
+    const facts = splitSection.querySelectorAll(
+        ".split-fact"
+    );
+
+    const imageWrapper = splitSection.querySelector(
+        ".split-presentation__image-wrapper"
+    );
+
+    const image = splitSection.querySelector(
+        ".split-presentation__image"
+    );
+
+    const isImageLeft = splitSection.classList.contains(
+        "split-presentation--image-left"
+    );
+
+    /*
+     * Set the starting position before animation.
+     */
+    gsap.set(imageWrapper, {
+        opacity: 0,
+        x: isImageLeft ? -100 : 100,
+        scale: 0.94
+    });
+
+    const splitTimeline = gsap.timeline({
+        scrollTrigger: {
+            trigger: splitSection,
+            start: "top 68%",
+            once: true
+        }
+    });
+
+    splitTimeline
+        .to(imageWrapper, {
+            opacity: 1,
+            x: 0,
+            scale: 1,
+            duration: 1.8,
+            ease: "power4.out"
+        })
+        .to(
+            eyebrow,
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.9,
+                ease: "power3.out"
+            },
+            "-=1.35"
+        )
+        .to(
+            title,
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1.7,
+                ease: "power4.out"
+            },
+            "-=1.1"
+        )
+        .to(
+            lead,
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1.1,
+                ease: "power3.out"
+            },
+            "-=0.85"
+        )
+        .to(
+            text,
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power3.out"
+            },
+            "-=0.7"
+        )
+        .to(
+            facts,
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.9,
+                stagger: 0.14,
+                ease: "power3.out"
+            },
+            "-=0.55"
+        );
+
+    /*
+     * Image parallax while scrolling.
+     */
+    gsap.fromTo(
+        image,
+        {
+            yPercent: -5,
+            scale: 1.08
+        },
+        {
+            yPercent: 5,
+            scale: 1.02,
+            ease: "none",
+
+            scrollTrigger: {
+                trigger: splitSection,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 1.2
+            }
+        }
+    );
+});
+
+
+// end presentation
+
+
+
+
+});
+
+
+
+
+
+
+const chapter = document.querySelector(".chapter-break");
+
+if (chapter) {
+
+    gsap.timeline({
+
+        scrollTrigger:{
+            trigger:chapter,
+            start:"top center",
+            once:true
+        }
+
+    })
+
+    .fromTo(
+
+        ".chapter-break__eyebrow",
+
+        {
+            opacity:0,
+            y:30
+        },
+
+        {
+            opacity:1,
+            y:0,
+            duration:1
+        }
+
+    )
+
+    .fromTo(
+
+        ".chapter-break__title",
+
+        {
+            opacity:0,
+            y:80
+        },
+
+        {
+            opacity:1,
+            y:0,
+            duration:2,
+            ease:"power4.out"
+        },
+
+        "-=.5"
+
+    )
+
+    .fromTo(
+
+        ".chapter-break__subtitle",
+
+        {
+            opacity:0,
+            y:40
+        },
+
+        {
+            opacity:1,
+            y:0,
+            duration:1.4
+        },
+
+        "-=1"
+
+    )
+
+    .fromTo(
+
+        ".chapter-break__scroll",
+
+        {
+            opacity:0
+        },
+
+        {
+            opacity:1,
+            duration:1
+        },
+
+        "-=.6"
+
+    );
 }
